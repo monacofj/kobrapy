@@ -100,7 +100,10 @@
 
  To start working on the exercise:
 
- * fork this project using the functionality of the hosting platform;
+ * create a new project in the git platform of choice (e.g. GitHub)
+   (do not fork this repository; you'll be workig in a brand new project)
+
+ * copy the contents of cobrapy into your project tree and commit them
 
  * give the development team access to the forked repository;
  
