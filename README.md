@@ -28,4 +28,4 @@
  Please refer to the file `docs/manual.md`.
 
  If you're exploring KhobraPy as a programming exercise, please refer to
- the file `docs/challenge.md`.
+ the file `docs/exercise-directions.md`.
