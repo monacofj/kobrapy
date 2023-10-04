@@ -10,9 +10,9 @@
  resource to teach open-source development practices, tools and project
  management methodologies to graduate computer sciences students.
 
- The practice consists in
+ The challenge consists in
 
- a) fixing the listed known issues (bugs and requested features);
+ a) fixing the listed known issues; 
    
  b) improving the game by adding some awesome new features.
 
@@ -22,8 +22,10 @@
  _If you ever use this project to implement any programming course or instruction
   program, the author would be glad if let him know._ 
 
-
  Getting started
  ------------------------------
 
  Please refer to the file `docs/manual.md`.
+
+ If you're exploring KhobraPy as a programming exercise, please refer to
+ the file `docs/challenge.md`.
