@@ -55,3 +55,5 @@
 
  Otherwise, if you're exploring KhobraPy as a programming exercise, please
  refer to the file `docs/exercise-directions.md`.
+ 
+Happy coding.
