@@ -2,13 +2,14 @@
  README
  ==============================
 
- KhobraPy is intended as programming exercise.
+ KobraPy is an open education resource teaching open-source development
+ practices and tools for newcomers. 
 
  It consists in a very simple version of the classical 80s' arcade snake game
  written in Python, that is provided as an initial codebase  that should be 
- further extended by the learner. It was originally created as an educational
- resource to teach open-source development practices, tools and project
- management methodologies to graduate computer sciences students.
+ further extended by the learner. It was originally created for the
+ undergraduate course on Open Source Systems taught to Computer Sciences and
+ Engineering students at the University of Sao Paulo.
 
  The challenge consists in
 
@@ -16,16 +17,15 @@
    
  b) improving the game by adding some awesome new features.
 
- KhobraPy is free software and can be distributed under the GNU General Public
- License vr.3 or any later version, as detailed in the included file `COPYING`.
-
- _If you ever use this project to implement any programming course or instruction
-  program, the author would be glad if let him know._ 
+ KobraPy is free software and can be distributed under the GNU General Public
+ License vr.3 or any later version.
 
  Getting started
  ------------------------------
 
  Please refer to the file `docs/manual.md`.
 
- If you're exploring KhobraPy as a programming exercise, please refer to
+ If you're exploring KobraPy as a programming exercise, please refer to
  the file `docs/exercise-directions.md`.
+
+ And if you enjoy it, the author would love to hear from you."

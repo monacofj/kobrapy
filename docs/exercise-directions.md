@@ -2,7 +2,7 @@
  Directions for the programming exercise
  =======================================
  
- KhobraPy is intended as programming exercise.
+ KobraPy is intended as programming exercise.
 
  It consists in a very simple version of the classical 80s' arcade snake game
  written in Python, that is provided as an initial codebase  that should be 
@@ -37,10 +37,10 @@
 
  REQUESTED FEATURES
 
- * In the traditional snake game, as the snake moves, it looses energy and,
-   if all of it is exhausted, the snake dies. To restore energy, the snake
-   needs to eat apples. The snake should be born with 100% energy level and
-   gradually expend energy as it moves. An energy meter should be shown.
+ * In some versions of the snake game, as the snake moves, it looses energy
+   and, if all of it is exhausted, the snake dies. To restore energy, the
+   snake needs to eat apples. The snake should be born with 100% energy level
+   and gradually expend energy as it moves. An energy meter should be shown.
 
  * Before the game starts, the user might have the possibility of choosing
    some game parameters such as
@@ -65,7 +65,7 @@
  Directions for this exercise
  ------------------------------
 
- The official repository of KhobraPy is https://github.com/monacofj/khobrapy.
+ The official repository of KobraPy is https://github.com/monacofj/khobrapy.
 
  To start working on the exercise:
 
@@ -73,7 +73,7 @@
 
  * give the development team access to the newly created repository;
 
- * clone your repository and copy KhobraPy source into your work tree
+ * clone your repository and copy KobraPy source into your work tree
 
  * follow the instructions given in `docs/CONTRIBUTING.md`.
 
@@ -84,10 +84,10 @@
  Author rights **(VERY IMPORTANT)**
  -------------------------------
 
- Bear in mind that the programming challenge is not contributing to KhobraPy.
+ Bear in mind that the programming challenge is not contributing to KobraPy.
  Surely, you may contribute and are welcome to if you're willing so; the
  proposed exercise, however, is to create a brand new program. Even if built
- on KhobraPy's codebase, your project will be a another piece of software and,
+ on KobraPy's codebase, your project will be a another piece of software and,
  when it comes to intellectual rights, you will be the author of your new
  creation. 
 
@@ -98,7 +98,7 @@
  1) Name your project.
 
     You have the arduous task of choosing a cool, catchy, awesome name
-    for your amazing new project (KhobraPy is taken :)
+    for your amazing new project (KobraPy is taken :)
 
     * Edit the documentation and the source code accordingly.
     
@@ -121,7 +121,7 @@
      organization (this is indeed a both requirement of GNU GPL and a standard
      practice). 
 
-     Also, once you're reusing code from KhobraPy, your software is considered
+     Also, once you're reusing code from KobraPy, your software is considered
      a derivative work. You're therefore expected to make proper attribution
      to the original author.
 
@@ -134,7 +134,7 @@
 
      This file is part of Foo.
 
-     Foo  is a derivative work of the code from KhobraPy by Monaco F. J.,
+     Foo  is a derivative work of the code from KobraPy by Monaco F. J.,
      distributed under GNU GPL vr3. KnobraPy source code can be found at
      https://github.com/monacofj/khobrapy. The main changes applied to the
      original code are listed in the file Changelog.
@@ -150,7 +150,7 @@
      Also, repeat the attribution note as exemplified before
 
      ```
-     Foo  is a derivative work of the code from KhobraPy by Monaco F. J.,
+     Foo  is a derivative work of the code from KobraPy by Monaco F. J.,
      distributed under GNU GPL vr3. KnobraPy source code can be found at
      https://github.com/monacofj/khobrapy. The main changes applied to the
      original code are listed in the file Changelog.
