@@ -2,9 +2,9 @@
 #
 #   Copyright (c) 2023, Monaco F. J. <monaco@usp.br>
 #
-#   This file is part of KhobraPy.
+#   This file is part of KobraPy.
 #
-#   KhobraPy is free software: you can redistribute it and/or modify
+#   KobraPy is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation, either version 3 of the License, or
 #   (at your option) any later version.
@@ -38,7 +38,7 @@ GRID_COLOR      = "#3c3c3b"  # Color of the grid lines.
 SCORE_COLOR     = "#ffffff"  # Color of the scoreboard.
 MESSAGE_COLOR   = "#808080"  # Color of the game-over message.
 
-WINDOW_TITLE    = "KhobraPy" # Window title.
+WINDOW_TITLE    = "KobraPy"  # Window title.
 
 CLOCK_TICKS     = 7         # How fast the snake moves.
 
@@ -52,8 +52,11 @@ clock = pygame.time.Clock()
 
 arena = pygame.display.set_mode((WIDTH, HEIGHT))
 
-BIG_FONT   = pygame.font.Font("assets/font/Ramasuri.ttf", int(WIDTH/8))
-SMALL_FONT = pygame.font.Font("assets/font/Ramasuri.ttf", int(WIDTH/20))
+# BIG_FONT   = pygame.font.Font("assets/font/Ramasuri.ttf", int(WIDTH/8))
+# SMALL_FONT = pygame.font.Font("assets/font/Ramasuri.ttf", int(WIDTH/20))
+
+BIG_FONT   = pygame.font.Font("assets/font/GetVoIP-Grotesque.ttf", int(WIDTH/8))
+SMALL_FONT = pygame.font.Font("assets/font/GetVoIP-Grotesque.ttf", int(WIDTH/20))
 
 pygame.display.set_caption(WINDOW_TITLE)
 
@@ -114,6 +117,10 @@ class Snake:
         # The snake is born.
         self.alive = True
 
+        # No collected apples.
+        self.got_apple = False
+
+        
     # This function is called at each loop interation.
 
     def update(self):
@@ -148,8 +155,9 @@ class Snake:
 
             # Resurrection
             self.alive = True
+            self.got_apple = False
 
-            # Drop and apple
+            # Drop an apple
             apple = Apple()
 
 
@@ -158,9 +166,14 @@ class Snake:
         # If head hasn't moved, tail shouldn't either (otherwise, self-byte).
         if (self.xmov or self.ymov):
 
-            # Prepend a new segment to tail and then remove the trailing segment.
+            # Prepend a new segment to tail.
             self.tail.insert(0,pygame.Rect(self.head.x, self.head.y, GRID_SIZE, GRID_SIZE))
-            self.tail.pop()
+
+            if self.got_apple:
+                self.got_apple = False 
+            else:
+                self.tail.pop()
+
 
             # Move the head along current direction.
             self.head.x += self.xmov * GRID_SIZE
@@ -207,7 +220,7 @@ snake = Snake()    # The snake
 
 apple = Apple()    # An apple
 
-center_prompt("Welcome", "Press to start")
+center_prompt(WINDOW_TITLE, "Press to start")
 
 ##
 ## Main loop
@@ -266,7 +279,8 @@ while True:
 
     # If the head pass over an apple, lengthen the snake and drop another apple
     if snake.head.x == apple.x and snake.head.y == apple.y:
-        snake.tail.append(pygame.Rect(snake.head.x, snake.head.x, GRID_SIZE, GRID_SIZE))
+        #snake.tail.append(pygame.Rect(snake.head.x, snake.head.y, GRID_SIZE, GRID_SIZE))
+        snake.got_apple = True;
         apple = Apple()
 
 

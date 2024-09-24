@@ -1,31 +1,42 @@
 
- README
+ Copyright 2023 Monaco F. J. <monaco@usp.br>
+ 
+ KobraPy is free software and is distributed under the terms of the
+ GNU General Public License 3.0.
+
+ KobraPy - Snake game challenge
  ==============================
 
- KhobraPy is intended as programming exercise.
+ KobraPy is intended as a programming exercise.
 
- It consists in a very simple version of the classical 80s' arcade snake game
- written in Python, that is provided as an initial codebase  that should be 
- further extended by the learner. It was originally created as an educational
- resource to teach open-source development practices, tools and project
- management methodologies to graduate computer sciences students.
+ It consists of a very simple version of the classic 80s arcade snake game
+ written in Python, provided as an initial codebase that the learner should
+ further extend. It was originally created as an educational resource to teach
+ open-source development practices, tools, and project management methodologies
+ to graduate computer science students. 
 
- The challenge consists in
+ The exercise consists of:
 
- a) fixing the listed known issues; 
-   
- b) improving the game by adding some awesome new features.
+ a) Fixing the listed known issues (bugs and requested features).
 
- KhobraPy is free software and can be distributed under the GNU General Public
- License vr.3 or any later version, as detailed in the included file `COPYING`.
+ b) Improving the game by adding some exciting new features.
 
- _If you ever use this project to implement any programming course or instruction
-  program, the author would be glad if let him know._ 
+ Important information for developers can be found in the file
+ docs/CONTRIBUTING.md. Please read it before starting your contribution. 
 
  Getting started
  ------------------------------
 
- Please refer to the file `docs/manual.md`.
+ User instructions are available in the file `docs/manual.md`.
 
- If you're exploring KhobraPy as a programming exercise, please refer to
- the file `docs/exercise-directions.md`.
+ If you're exploring KobraPy as a programming exercise, please refer to
+ the file `docs/challenge.md` for directions. 
+
+ And if you like it, feel free to let the author know.
+
+ Contributing
+ ------------------------------
+
+ Your contribution will be greatly appreciated.
+
+ See `docs/CONTRIBUTING.md` for further information.

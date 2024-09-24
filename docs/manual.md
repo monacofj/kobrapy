@@ -1,8 +1,8 @@
 
- KhobraPy Manual
+ KobraPy Manual
  ==============================
 
- KhobraPy is intended as programming exercise.
+ KobraPy is intended as programming exercise.
 
  It consists in a very simple version of the classical 80s' arcade snake game
  written in Python, that is provided as an initial codebase  that should be 
@@ -10,7 +10,7 @@
  resource to teach open-source development practices, tools and project
  management methodologies to graduate computer sciences students.
 
- KhobraPy is free software and can be distributed under the GNU General Public
+ KobraPy is free software and can be distributed under the GNU General Public
  License vr.3 or any later version.
 
  Requirements
@@ -44,7 +44,7 @@
 
  When the game ends, press any key to restart or 'q' to quit.
 
- Contributing to KhobraPy
+ Contributing to KobraPy
  ------------------------------
 
  The official repository of KhobraPy is https://github.com/monacofj/khobrapy.
