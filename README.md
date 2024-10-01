@@ -1,5 +1,5 @@
 
- Copyright 2023 Monaco F. J. <monaco@usp.br>
+ Copyright 2023 Monaco F. J. <monaco@usp.br> 
  
  KobraPy is free software and is distributed under the terms of the
  GNU General Public License 3.0.
