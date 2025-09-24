@@ -40,6 +40,15 @@ MESSAGE_COLOR   = "#808080"  # Color of the game-over message.
 
 WINDOW_TITLE    = "KobraPy"  # Window title.
 
+COMMANDS = """ 
+Commands
+Up arrow: move up
+Down arrow: move down
+Right arrow: move right
+Left arrow: move left
+Q: quit
+P: pause""" # List of commands
+
 CLOCK_TICKS     = 7         # How fast the snake moves.
 
 ##
@@ -72,9 +81,15 @@ def center_prompt(title, subtitle):
     center_title_rect = center_title.get_rect(center=(WIDTH/2, HEIGHT/2))
     arena.blit(center_title, center_title_rect)
 
-    center_subtitle = SMALL_FONT.render(subtitle, True, MESSAGE_COLOR)
-    center_subtitle_rect = center_subtitle.get_rect(center=(WIDTH/2, HEIGHT*2/3))
-    arena.blit(center_subtitle, center_subtitle_rect)
+    # Split subtitle into lines and render each one
+    lines = subtitle.split('\n')
+    line_height = SMALL_FONT.get_height()
+    
+    for i, line in enumerate(lines):
+        if line.strip():  # Skip empty lines
+            line_surface = SMALL_FONT.render(line, True, MESSAGE_COLOR)
+            line_rect = line_surface.get_rect(center=(WIDTH/2, HEIGHT*3/5 + i * line_height))
+            arena.blit(line_surface, line_rect)
 
     pygame.display.update()
 
@@ -140,7 +155,7 @@ class Snake:
 
             # Tell the bad news
             pygame.draw.rect(arena, DEAD_HEAD_COLOR, snake.head)
-            center_prompt("Game Over", "Press to restart")
+            center_prompt("Game Over", "Press to restart"+COMMANDS)
 
             # Respan the head
             self.x, self.y = GRID_SIZE, GRID_SIZE
@@ -220,7 +235,7 @@ snake = Snake()    # The snake
 
 apple = Apple()    # An apple
 
-center_prompt(WINDOW_TITLE, "Press to start")
+center_prompt(WINDOW_TITLE, "Press to start"+COMMANDS)
 
 ##
 ## Main loop
