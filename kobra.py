@@ -187,8 +187,8 @@ class Apple:
     def __init__(self):
 
         # Pick a random position within the game arena
-        self.x = int(random.randint(0, WIDTH)/GRID_SIZE) * GRID_SIZE
-        self.y = int(random.randint(0, HEIGHT)/GRID_SIZE) * GRID_SIZE
+        self.x = int(random.randint(0, WIDTH - 1)/GRID_SIZE) * GRID_SIZE
+        self.y = int(random.randint(0, HEIGHT - 1)/GRID_SIZE) * GRID_SIZE
 
         # Create an apple at that location
         self.rect = pygame.Rect(self.x, self.y, GRID_SIZE, GRID_SIZE)
