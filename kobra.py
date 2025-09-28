@@ -33,6 +33,7 @@ HEAD_COLOR      = "#00aa00"  # Color of the snake's head.
 DEAD_HEAD_COLOR = "#4b0082"  # Color of the dead snake's head.
 TAIL_COLOR      = "#00ff00"  # Color of the snake's tail.
 APPLE_COLOR     = "#aa0000"  # Color of the apple.
+KILLER_APPLE_COLOR = "#800020"  # Color of the killer apple (dark red).
 ARENA_COLOR     = "#202020"  # Color of the ground.
 GRID_COLOR      = "#3c3c3b"  # Color of the grid lines.
 SCORE_COLOR     = "#ffffff"  # Color of the scoreboard.
@@ -41,6 +42,8 @@ MESSAGE_COLOR   = "#808080"  # Color of the game-over message.
 WINDOW_TITLE    = "KobraPy"  # Window title.
 
 CLOCK_TICKS     = 7         # How fast the snake moves.
+KILLER_APPLE_CHANCE = 0.15  # 15% chance to spawn killer apple.
+KILLER_APPLE_LIFETIME = 25   # Frames until killer apple disappears (about 3.5 seconds at 7 FPS).
 
 ##
 ## Game implementation.
@@ -158,7 +161,7 @@ class Snake:
             self.got_apple = False
 
             # Drop an apple
-            apple = Apple()
+            apple = create_new_apple()
 
 
         # Move the snake.
@@ -200,6 +203,49 @@ class Apple:
         # Drop the apple
         pygame.draw.rect(arena, APPLE_COLOR, self.rect)
 
+##
+## The killer apple class (instant death on touch).
+##
+
+class KillerApple:
+    def __init__(self):
+
+        # Pick a random position within the game arena
+        self.x = int(random.randint(0, WIDTH)/GRID_SIZE) * GRID_SIZE
+        self.y = int(random.randint(0, HEIGHT)/GRID_SIZE) * GRID_SIZE
+
+        # Create a killer apple at that location
+        self.rect = pygame.Rect(self.x, self.y, GRID_SIZE, GRID_SIZE)
+        
+        # Timer for automatic disappearance
+        self.lifetime = KILLER_APPLE_LIFETIME
+        self.expired = False
+
+    # This function is called each interation of the game loop
+
+    def update(self):
+        # Decrease timer
+        self.lifetime -= 1
+        
+        # If time is up, mark as expired
+        if self.lifetime <= 0:
+            self.expired = True
+            return  # Don't draw if expired
+
+        # Draw the killer apple (dark red with black border)
+        pygame.draw.rect(arena, KILLER_APPLE_COLOR, self.rect)
+        pygame.draw.rect(arena, "#000000", self.rect, 3)  # Black border
+
+##
+## Helper function to create apples
+##
+
+def create_new_apple():
+    """Create a new apple (normal or killer based on chance)"""
+    if random.random() < KILLER_APPLE_CHANCE:
+        return KillerApple()
+    else:
+        return Apple()
 
 ##
 ## Draw the arena
@@ -218,7 +264,7 @@ draw_grid()
 
 snake = Snake()    # The snake
 
-apple = Apple()    # An apple
+apple = create_new_apple()    # An apple (could be killer)
 
 center_prompt(WINDOW_TITLE, "Press to start")
 
@@ -265,6 +311,10 @@ while True:
         draw_grid()
 
         apple.update()
+        
+        # Check if killer apple expired
+        if isinstance(apple, KillerApple) and apple.expired:
+            apple = create_new_apple()  # Create new apple automatically
 
     # Draw the tail
     for square in snake.tail:
@@ -277,11 +327,15 @@ while True:
     score = BIG_FONT.render(f"{len(snake.tail)}", True, SCORE_COLOR)
     arena.blit(score, score_rect)
 
-    # If the head pass over an apple, lengthen the snake and drop another apple
+    # If the head passes over an apple, check what type it is
     if snake.head.x == apple.x and snake.head.y == apple.y:
-        #snake.tail.append(pygame.Rect(snake.head.x, snake.head.y, GRID_SIZE, GRID_SIZE))
-        snake.got_apple = True;
-        apple = Apple()
+        if isinstance(apple, KillerApple):
+            # Killer apple kills the snake instantly
+            snake.alive = False
+        else:
+            # Normal apple - lengthen the snake and drop another apple
+            snake.got_apple = True
+            apple = create_new_apple()
 
 
     # Update display and move clock.
