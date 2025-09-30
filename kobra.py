@@ -40,7 +40,7 @@ MESSAGE_COLOR   = "#808080"  # Color of the game-over message.
 
 WINDOW_TITLE    = "KobraPy"  # Window title.
 
-CLOCK_TICKS     = 7         # How fast the snake moves.
+CLOCK_TICKS     = 7          # How fast the snake moves (cells per second).
 
 ##
 ## Game implementation.
@@ -60,7 +60,18 @@ SMALL_FONT = pygame.font.Font("assets/font/GetVoIP-Grotesque.ttf", int(WIDTH/20)
 
 pygame.display.set_caption(WINDOW_TITLE)
 
-game_on = 1
+# ===== Alteração significativa: tick fixo por USEREVENT =====
+STEP = pygame.USEREVENT + 1
+
+def _tick_interval_ms():
+    return int(1000 / CLOCK_TICKS)
+
+def _set_step_timer(active: bool):
+    pygame.time.set_timer(STEP, _tick_interval_ms() if active else 0)
+
+game_on = True
+_set_step_timer(True)
+# ============================================================
 
 ## This function is called when the snake dies.
 
@@ -104,9 +115,13 @@ class Snake:
 
         # Initial direction
         # xmov :  -1 left,    0 still,   1 right
-        # ymov :  -1 up       0 still,   1 dows
+        # ymov :  -1 up       0 still,   1 down
         self.xmov = 1
         self.ymov = 0
+
+        # ===== parte do tick fixo: direção pendente aplicada no STEP =====
+        self.pending_dir = (self.xmov, self.ymov)
+        # =================================================================
 
         # The snake has a head segement,
         self.head = pygame.Rect(self.x, self.y, GRID_SIZE, GRID_SIZE)
@@ -120,11 +135,37 @@ class Snake:
         # No collected apples.
         self.got_apple = False
 
-        
-    # This function is called at each loop interation.
+    # ===== nova API: set_dir só marca a direção para aplicar no próximo STEP
+    def set_dir(self, dx, dy):
+        # evita reversão imediata
+        if (dx, dy) != (-self.xmov, -self.ymov):
+            self.pending_dir = (dx, dy)
+    # =====================================================================
 
+    # This function is called at each loop interation (agora: a cada STEP).
     def update(self):
         global apple
+
+        # aplica direção pendente no início do tick
+        self.xmov, self.ymov = self.pending_dir
+
+        # Move the snake (um passo por tick).
+
+        # Se a cabeça não se moveu, a cauda também não (senão, auto-mordida).
+        if (self.xmov or self.ymov):
+
+            # Prepend a new segment to tail.
+            self.tail.insert(0,pygame.Rect(self.head.x, self.head.y, GRID_SIZE, GRID_SIZE))
+
+            if self.got_apple:
+                self.got_apple = False
+            else:
+                if self.tail:
+                    self.tail.pop()
+
+            # Move the head along current direction.
+            self.head.x += self.xmov * GRID_SIZE
+            self.head.y += self.ymov * GRID_SIZE
 
         # Check for border crash.
         if self.head.x not in range(0, WIDTH) or self.head.y not in range(0, HEIGHT):
@@ -142,16 +183,17 @@ class Snake:
             pygame.draw.rect(arena, DEAD_HEAD_COLOR, snake.head)
             center_prompt("Game Over", "Press to restart")
 
-            # Respan the head
+            # Respawn the head
             self.x, self.y = GRID_SIZE, GRID_SIZE
             self.head = pygame.Rect(self.x, self.y, GRID_SIZE, GRID_SIZE)
 
-            # Respan the initial tail
+            # Respawn the initial tail
             self.tail = []
 
             # Initial direction
             self.xmov = 1 # Right
             self.ymov = 0 # Still
+            self.pending_dir = (self.xmov, self.ymov)
 
             # Resurrection
             self.alive = True
@@ -160,24 +202,6 @@ class Snake:
             # Drop an apple
             apple = Apple()
 
-
-        # Move the snake.
-
-        # If head hasn't moved, tail shouldn't either (otherwise, self-byte).
-        if (self.xmov or self.ymov):
-
-            # Prepend a new segment to tail.
-            self.tail.insert(0,pygame.Rect(self.head.x, self.head.y, GRID_SIZE, GRID_SIZE))
-
-            if self.got_apple:
-                self.got_apple = False 
-            else:
-                self.tail.pop()
-
-
-            # Move the head along current direction.
-            self.head.x += self.xmov * GRID_SIZE
-            self.head.y += self.ymov * GRID_SIZE
 
 ##
 ## The apple class.
@@ -230,41 +254,44 @@ while True:
 
     for event in pygame.event.get():           # Wait for events
 
-       # App terminated
+        # App terminated
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
 
-          # Key pressed
+        # Key pressed
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_DOWN:    # Down arrow:  move down
-                snake.ymov = 1
-                snake.xmov = 0
-            elif event.key == pygame.K_UP:    # Up arrow:    move up
-                snake.ymov = -1
-                snake.xmov = 0
-            elif event.key == pygame.K_RIGHT: # Right arrow: move right
-                snake.ymov = 0
-                snake.xmov = 1
-            elif event.key == pygame.K_LEFT:  # Left arrow:  move left
-                snake.ymov = 0
-                snake.xmov = -1
+            if event.key == pygame.K_DOWN:    # Down arrow:  move down (pendente)
+                snake.set_dir(0, 1)
+            elif event.key == pygame.K_UP:    # Up arrow:    move up (pendente)
+                snake.set_dir(0, -1)
+            elif event.key == pygame.K_RIGHT: # Right arrow: move right (pendente)
+                snake.set_dir(1, 0)
+            elif event.key == pygame.K_LEFT:  # Left arrow:  move left (pendente)
+                snake.set_dir(-1, 0)
             elif event.key == pygame.K_q:     # Q         : quit game
                 pygame.quit()
                 sys.exit()
-            elif event.key == pygame.K_p:     # S         : pause game
+            elif event.key == pygame.K_p:     # P         : pause game (liga/desliga timer)
                 game_on = not game_on
+                _set_step_timer(game_on)
 
-    ## Update the game
+        # ===== novo: a simulação avança apenas no tick =====
+        if event.type == STEP and game_on:
+            snake.update()
 
-    if game_on:
+            # If the head pass over an apple, lengthen the snake and drop another apple
+            if snake.head.x == apple.x and snake.head.y == apple.y:
+                snake.got_apple = True
+                apple = Apple()
+        # ===================================================
 
-        snake.update()
+    ## Render (sempre, independente da pausa)
 
-        arena.fill(ARENA_COLOR)
-        draw_grid()
+    arena.fill(ARENA_COLOR)
+    draw_grid()
 
-        apple.update()
+    apple.update()
 
     # Draw the tail
     for square in snake.tail:
@@ -277,13 +304,6 @@ while True:
     score = BIG_FONT.render(f"{len(snake.tail)}", True, SCORE_COLOR)
     arena.blit(score, score_rect)
 
-    # If the head pass over an apple, lengthen the snake and drop another apple
-    if snake.head.x == apple.x and snake.head.y == apple.y:
-        #snake.tail.append(pygame.Rect(snake.head.x, snake.head.y, GRID_SIZE, GRID_SIZE))
-        snake.got_apple = True;
-        apple = Apple()
-
-
-    # Update display and move clock.
+    # Update display and keep a reasonable FPS for render (não influencia o passo)
     pygame.display.update()
-    clock.tick(CLOCK_TICKS)
+    clock.tick(60)  # FPS de render apenas
