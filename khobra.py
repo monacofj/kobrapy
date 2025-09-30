@@ -239,7 +239,7 @@ while True:
             elif event.key == pygame.K_q:     # Q         : quit game
                 pygame.quit()
                 sys.exit()
-            elif event.key == pygame.K_p:     # S         : pause game
+            elif event.key == pygame.K_p:     # P         : pause game
                 game_on = not game_on
 
     ## Update the game
