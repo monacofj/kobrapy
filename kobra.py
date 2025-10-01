@@ -237,23 +237,34 @@ while True:
 
           # Key pressed
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_DOWN:    # Down arrow:  move down
-                snake.ymov = 1
-                snake.xmov = 0
-            elif event.key == pygame.K_UP:    # Up arrow:    move up
-                snake.ymov = -1
-                snake.xmov = 0
-            elif event.key == pygame.K_RIGHT: # Right arrow: move right
-                snake.ymov = 0
-                snake.xmov = 1
-            elif event.key == pygame.K_LEFT:  # Left arrow:  move left
-                snake.ymov = 0
-                snake.xmov = -1
-            elif event.key == pygame.K_q:     # Q         : quit game
+            # Immediate actions
+            if event.key == pygame.K_q:     # Q         : quit game
                 pygame.quit()
                 sys.exit()
-            elif event.key == pygame.K_p:     # S         : pause game
+            elif event.key == pygame.K_p:   # P         : pause game
                 game_on = not game_on
+            else:
+                # Map arrow keys to desired movement vector (nx, ny)
+                nx = ny = None
+                if event.key == pygame.K_DOWN:    # Down arrow:  move down
+                    nx, ny = 0, 1
+                elif event.key == pygame.K_UP:    # Up arrow:    move up
+                    nx, ny = 0, -1
+                elif event.key == pygame.K_RIGHT: # Right arrow: move right
+                    nx, ny = 1, 0
+                elif event.key == pygame.K_LEFT:  # Left arrow:  move left
+                    nx, ny = -1, 0
+
+                # If an arrow was pressed, possibly update direction.
+                if nx is not None:
+                    # Prevent reversing when snake has tail (length > 0).
+                    # If tail is empty, allow reversing (harmless).
+                    if len(snake.tail) > 0 and nx == -snake.xmov and ny == -snake.ymov:
+                        # Ignore reverse input
+                        pass
+                    else:
+                        snake.xmov = nx
+                        snake.ymov = ny
 
     ## Update the game
 
