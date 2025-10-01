@@ -17,9 +17,18 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import pygame
-import random
+# Friendly message recommending what to do if pygame is not installed.
 import sys
+
+try:
+    import pygame
+except ImportError:
+    print("Module 'pygame' not found.")
+    print("Install with: pip install pygame")
+    print("Or (if needed): python -m pip install pygame")
+    raise SystemExit(1)
+
+import random
 
 ##
 ## Game customization.
@@ -42,11 +51,28 @@ WINDOW_TITLE    = "KobraPy"  # Window title.
 
 CLOCK_TICKS     = 7         # How fast the snake moves.
 
+# Sound configuration
+EAT_SOUND_PATH  = "assets/sounds/yoshi-tongue.mp3"  # path relative to project root
+SFX_VOLUME      = 0.6 # sound effect volume (0.0 - 1.0)
+
 ##
 ## Game implementation.
 ##
 
 pygame.init()
+
+# Initialize mixer and load eat sound (fall back silently to None if unavailable)
+try:
+    pygame.mixer.init()
+    try:
+        eat_sound = pygame.mixer.Sound(EAT_SOUND_PATH)
+        eat_sound.set_volume(SFX_VOLUME)
+    except Exception as _e:
+        print(f"Warning: could not load sound '{EAT_SOUND_PATH}'. Continuing without sound.")
+        eat_sound = None
+except Exception as _e:
+    print("Warning: pygame.mixer could not be initialized. Continuing without sound.")
+    eat_sound = None
 
 clock = pygame.time.Clock()
 
@@ -281,6 +307,12 @@ while True:
     if snake.head.x == apple.x and snake.head.y == apple.y:
         #snake.tail.append(pygame.Rect(snake.head.x, snake.head.y, GRID_SIZE, GRID_SIZE))
         snake.got_apple = True;
+        # Play capture sound if available
+        if eat_sound:
+            try:
+                eat_sound.play()
+            except Exception:
+                pass
         apple = Apple()
 
 
