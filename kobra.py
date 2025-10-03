@@ -50,6 +50,9 @@ pygame.init()
 
 clock = pygame.time.Clock()
 
+# Load eat sound
+eat_sound = pygame.mixer.Sound("assets/sound/eat.wav")
+
 arena = pygame.display.set_mode((WIDTH, HEIGHT))
 
 # BIG_FONT   = pygame.font.Font("assets/font/Ramasuri.ttf", int(WIDTH/8))
@@ -279,8 +282,8 @@ while True:
 
     # If the head pass over an apple, lengthen the snake and drop another apple
     if snake.head.x == apple.x and snake.head.y == apple.y:
-        #snake.tail.append(pygame.Rect(snake.head.x, snake.head.y, GRID_SIZE, GRID_SIZE))
-        snake.got_apple = True;
+        eat_sound.play()  # Play the sound
+        snake.got_apple = True
         apple = Apple()
 
 
