@@ -43,6 +43,25 @@ WINDOW_TITLE    = "KobraPy"  # Window title.
 CLOCK_TICKS     = 7         # How fast the snake moves.
 
 ##
+## Drawing functions.
+##
+
+def draw_apple(surface, rect):
+    """Draws a simple apple with red body and green stem."""
+    # Apple body (slightly flattened circle)
+    apple_rect = pygame.Rect(rect.x + 5, rect.y + 8, rect.width - 10, rect.height - 15)
+    pygame.draw.ellipse(surface, APPLE_COLOR, apple_rect)
+    
+    # Apple stem (small green rectangle at the top)
+    stem_color = "#228B22"  # Forest green
+    stem_rect = pygame.Rect(rect.x + rect.width//2 - 3, rect.y + 2, 6, 10)
+    pygame.draw.rect(surface, stem_color, stem_rect)
+    
+    # Small leaf (small green ellipse)
+    leaf_rect = pygame.Rect(rect.x + rect.width//2 + 2, rect.y + 3, 8, 4)
+    pygame.draw.ellipse(surface, stem_color, leaf_rect)
+
+##
 ## Game implementation.
 ##
 
@@ -196,9 +215,8 @@ class Apple:
     # This function is called each interation of the game loop
 
     def update(self):
-
-        # Drop the apple
-        pygame.draw.rect(arena, APPLE_COLOR, self.rect)
+        # Draw the apple using our custom function
+        draw_apple(arena, self.rect)
 
 
 ##
