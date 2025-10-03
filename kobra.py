@@ -62,6 +62,46 @@ pygame.display.set_caption(WINDOW_TITLE)
 
 game_on = 1
 
+## This function is called at the start of the game.
+def grid_size_selection():
+    global GRID_SIZE
+    
+    # Show options
+    arena.fill(ARENA_COLOR)
+    
+    command = SMALL_FONT.render("Select the grid size:", True, MESSAGE_COLOR)
+    command_rect = command.get_rect(center=(WIDTH/2, HEIGHT/2.2))
+    arena.blit(command, command_rect)
+    
+    options_text = ["1 - Small (25)", "2 - Medium (50)", "3 - Big (100)"]
+    start_y = HEIGHT/2 + 30
+    line_height = 30
+
+    for i, text in enumerate(options_text):
+        options_line = SMALL_FONT.render(text, True, MESSAGE_COLOR)
+        options_rect = options_line.get_rect(center=(WIDTH/2, start_y + i * line_height))
+        arena.blit(options_line, options_rect)
+    
+    pygame.display.update()
+    
+    # Wait for a keypress
+    waiting = True
+    while waiting:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_1:
+                    GRID_SIZE = 25
+                elif event.key == pygame.K_2:
+                    GRID_SIZE = 50
+                elif event.key == pygame.K_3:
+                    GRID_SIZE = 100
+                waiting = False
+    
+    arena.fill(ARENA_COLOR)
+
 ## This function is called when the snake dies.
 
 def center_prompt(title, subtitle):
@@ -215,12 +255,14 @@ score = BIG_FONT.render("1", True, MESSAGE_COLOR)
 score_rect = score.get_rect(center=(WIDTH/2, HEIGHT/20+HEIGHT/30))
 
 draw_grid()
+center_prompt(WINDOW_TITLE, "Press to start")
+
+grid_size_selection()
+
+draw_grid()
 
 snake = Snake()    # The snake
-
 apple = Apple()    # An apple
-
-center_prompt(WINDOW_TITLE, "Press to start")
 
 ##
 ## Main loop
