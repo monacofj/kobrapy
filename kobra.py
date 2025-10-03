@@ -42,6 +42,7 @@ WINDOW_TITLE    = "KobraPy"  # Window title.
 
 CLOCK_TICKS     = 7         # How fast the snake moves.
 
+
 ##
 ## Game implementation.
 ##
@@ -51,6 +52,12 @@ pygame.init()
 clock = pygame.time.Clock()
 
 arena = pygame.display.set_mode((WIDTH, HEIGHT))
+ 
+tile1 = pygame.Surface((50, 50))
+tile1.fill((135, 206, 250))
+
+tile2 = pygame.Surface((50, 50))
+tile2.fill((173, 216, 230))
 
 # BIG_FONT   = pygame.font.Font("assets/font/Ramasuri.ttf", int(WIDTH/8))
 # SMALL_FONT = pygame.font.Font("assets/font/Ramasuri.ttf", int(WIDTH/20))
@@ -261,7 +268,15 @@ while True:
 
         snake.update()
 
-        arena.fill(ARENA_COLOR)
+        for x in range(0, WIDTH, 50):
+            for y in range(0, HEIGHT, 50):
+                if ((x//50 + y//50) % 2 == 0):
+                    arena.blit(tile1, (x, y))
+                else:
+                    arena.blit(tile2, (x, y))
+
+
+        pygame.display.flip()
         draw_grid()
 
         apple.update()
