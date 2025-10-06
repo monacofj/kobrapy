@@ -20,6 +20,7 @@
 import pygame
 import random
 import sys
+import os
 
 ##
 ## Game customization.
@@ -42,6 +43,8 @@ WINDOW_TITLE    = "KobraPy"  # Window title.
 
 CLOCK_TICKS     = 7         # How fast the snake moves.
 
+HIGHSCORE_FILE  = "assets/highscore.txt" # Name of the high score file
+
 ##
 ## Game implementation.
 ##
@@ -61,6 +64,40 @@ SMALL_FONT = pygame.font.Font("assets/font/GetVoIP-Grotesque.ttf", int(WIDTH/20)
 pygame.display.set_caption(WINDOW_TITLE)
 
 game_on = 1
+
+##
+## High Score functions
+##
+
+## This function is called when the program starts to load the last saved high score
+
+def load_high_score():
+    score = 0
+    try:
+        file = open(HIGHSCORE_FILE, "r")
+        score = file.read()
+        file.close()
+    finally:
+        return int(score)
+
+## This function is called when the snake dies or the player quits
+
+def save_high_score(score):
+    try:
+        file = open(HIGHSCORE_FILE, "w")
+        file.write(str(score))
+        file.close()
+    except:
+        print("Failed to open file")
+
+## This function is called to display the updated high score in real time
+
+def update_high_score(current_score): 
+    if current_score > HIGH_SCORE:
+        return current_score
+    return HIGH_SCORE
+
+HIGH_SCORE = load_high_score()
 
 ## This function is called when the snake dies.
 
@@ -84,9 +121,15 @@ def center_prompt(title, subtitle):
         if event.type == pygame.KEYDOWN:
             break
         if event.type == pygame.QUIT:
+            # Update and save high score before quitting
+            HIGH_SCORE = update_high_score(len(snake.tail)) 
+            save_high_score(HIGH_SCORE)
             pygame.quit()
             sys.exit()
     if event.key == pygame.K_q:          # 'Q' quits game
+        # Update and save high score before quitting
+        HIGH_SCORE = update_high_score(len(snake.tail)) 
+        save_high_score(HIGH_SCORE)
         pygame.quit()
         sys.exit()
 
@@ -119,12 +162,11 @@ class Snake:
 
         # No collected apples.
         self.got_apple = False
-
         
     # This function is called at each loop interation.
 
     def update(self):
-        global apple
+        global apple, HIGH_SCORE
 
         # Check for border crash.
         if self.head.x not in range(0, WIDTH) or self.head.y not in range(0, HEIGHT):
@@ -137,6 +179,9 @@ class Snake:
 
         # In the event of death, reset the game arena.
         if not self.alive:
+            # Update high score if needed
+            HIGH_SCORE = update_high_score(len(self.tail))
+            save_high_score(HIGH_SCORE)
 
             # Tell the bad news
             pygame.draw.rect(arena, DEAD_HEAD_COLOR, snake.head)
@@ -232,10 +277,13 @@ while True:
 
        # App terminated
         if event.type == pygame.QUIT:
+            # Update and save high score before quitting
+            HIGH_SCORE = update_high_score(len(snake.tail)) 
+            save_high_score(HIGH_SCORE)
             pygame.quit()
             sys.exit()
 
-          # Key pressed
+        # Key pressed
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_DOWN:    # Down arrow:  move down
                 snake.ymov = 1
@@ -250,6 +298,9 @@ while True:
                 snake.ymov = 0
                 snake.xmov = -1
             elif event.key == pygame.K_q:     # Q         : quit game
+                # Update and save high score before quitting
+                HIGH_SCORE = update_high_score(len(snake.tail)) 
+                save_high_score(HIGH_SCORE)
                 pygame.quit()
                 sys.exit()
             elif event.key == pygame.K_p:     # S         : pause game
@@ -277,12 +328,17 @@ while True:
     score = BIG_FONT.render(f"{len(snake.tail)}", True, SCORE_COLOR)
     arena.blit(score, score_rect)
 
+    # Update and show high score
+    HIGH_SCORE = update_high_score(len(snake.tail))
+    high_score_text = SMALL_FONT.render(f"High Score: {HIGH_SCORE}", True, SCORE_COLOR)
+    high_score_rect = high_score_text.get_rect(center=(WIDTH/2, HEIGHT - 25))
+    arena.blit(high_score_text, high_score_rect)
+
     # If the head pass over an apple, lengthen the snake and drop another apple
     if snake.head.x == apple.x and snake.head.y == apple.y:
         #snake.tail.append(pygame.Rect(snake.head.x, snake.head.y, GRID_SIZE, GRID_SIZE))
         snake.got_apple = True;
         apple = Apple()
-
 
     # Update display and move clock.
     pygame.display.update()
