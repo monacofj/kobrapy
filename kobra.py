@@ -108,6 +108,10 @@ class Snake:
         self.xmov = 1
         self.ymov = 0
 
+        # Store previous direction
+        self.prev_xmov = self.xmov
+        self.prev_ymov = self.ymov
+
         # The snake has a head segement,
         self.head = pygame.Rect(self.x, self.y, GRID_SIZE, GRID_SIZE)
 
@@ -153,6 +157,9 @@ class Snake:
             self.xmov = 1 # Right
             self.ymov = 0 # Still
 
+            self.prev_xmov = self.xmov
+            self.prev_ymov = self.ymov
+
             # Resurrection
             self.alive = True
             self.got_apple = False
@@ -166,6 +173,7 @@ class Snake:
         # If head hasn't moved, tail shouldn't either (otherwise, self-byte).
         if (self.xmov or self.ymov):
 
+
             # Prepend a new segment to tail.
             self.tail.insert(0,pygame.Rect(self.head.x, self.head.y, GRID_SIZE, GRID_SIZE))
 
@@ -174,10 +182,17 @@ class Snake:
             else:
                 self.tail.pop()
 
+            # Check for avoid reverse movemnt
+            if self.prev_xmov == -self.xmov or self.prev_ymov == -self.ymov:
+                self.xmov = self.prev_xmov
+                self.ymov = self.prev_ymov
 
             # Move the head along current direction.
             self.head.x += self.xmov * GRID_SIZE
             self.head.y += self.ymov * GRID_SIZE
+
+            self.prev_xmov = self.xmov
+            self.prev_ymov = self.ymov
 
 ##
 ## The apple class.
