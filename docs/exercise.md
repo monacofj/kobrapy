@@ -1,89 +1,95 @@
-Directions for the Programming Exercise
-=======================================
+Programming Exercise
+====================
 
-The exercise consists of addressing some known issues and enhancing the game
-by adding new features.
+The goal of this exercise is to gain hands-on experience with the tools,
+practices, and workflows of open-source software development.
 
-Before diving into the code, please observe the following notes:
+KobraPy provides a starter codebase with known bugs, feature requests, and
+suggested improvements. These offer opportunities to practice version control,
+issue tracking, collaborative development, and release management.
 
-* First, note that the exercise is not about contributing to KobraPy itself.
-  KobraPy is the learning resource and codebase you should use as a starting
-  point for this programming exercise. If you want to contribute to KobraPy,
-  that’s great—but the exercise requires creating a new project based on
-  KobraPy and extending it further.
+Getting Started
+---------------
 
-  If you are experimenting with KobraPy in the context of a training program,
-  your instructor may provide directions on how to create your new project and
-  how to import the KobraPy codebase into it.
+**Create your own project.** The exercise is not about contributing to KobraPy
+itself, but about developing a new project based on it.
 
-  Alternatively, if you are working independently, the recommended approach
-  is not to fork KobraPy on GitHub. Forking would be correct if you wanted to
-  contribute to KobraPy, but not for completing this exercise. Instead, create
-  your own project and then copy KobraPy into it.
+Your instructor may provide specific setup instructions. Otherwise, create a
+new repository and copy the KobraPy codebase into it. Do not fork KobraPy on
+GitHub for this exercise: forks are appropriate when contributing back to the
+original project.
 
-  You will then edit your own project’s code.
+**Choose a name.** Every programmer knows the responsibility involved in
+naming a project. Choose wisely.
 
-* Second, when you create your project, you should give it a name. Every fellow
-  programmer knows the weight of responsibility in this sacred ritual. Perhaps
-  your instructor has already chosen one for you. If not—choose wisely.
+Attribution and Licensing
+-------------------------
 
-* Every time you incorporate KobraPy code into your new project, you are
-  creating a derivative work. This happens when you either edit a source file
-  copied from KobraPy or copy/paste code from KobraPy into a file you created.
+Your project is a derivative work of KobraPy and must respect its copyright
+and licensing terms.
 
-  Since it is a derivative work, you must edit the copyright notice in that file
-  to identify yourself as a co-author, while still crediting KobraPy. Do not	
-  remove existing names—just add yours. Also include a visible comment stating
-  that this is a derivative work from KobraPy.
+For this exercise, adopt the following conventions:
 
-* You should also edit the documentation in your repository:
+- Preserve original copyright notices in reused files, adding attribution
+  for new contributions.
+- Attribute new files to your development team, using a collective copyright
+  notice.
+- Use SPDX identifiers [1] for copyright and license information.
+- Choose a license consistent with KobraPy's licensing terms. When in doubt,
+  use the same license as KobraPy.
 
-  ```
-  - README.md			
-  - AUTHORS			
-  - docs/manual.md
-  - docs/CONTRIBUTING.md
-  ```
+Documentation
+-------------
 
-  These documentation files should describe **your project**, not KobraPy.
+Your documentation should describe **your own project**, not KobraPy. Review
+and update the relevant files:
 
-* KobraPy, in its current state, purposely includes a few known bugs
-  that you must fix. There is also a list of requested features to inspire
-  you. (These are optional—you may design your own enhancements.)
+- `README.md`
+- `AUTHORS`
+- `docs/manual.md`
+- `docs/CONTRIBUTING.md`
 
-  The list of bugs and feature requests is in `docs/issues.md`.
+Make sure your contribution guidelines reflect the practices and workflows
+adopted by your team.
 
-  For each fix or feature you plan to work on, create a corresponding entry in
-your repository’s GitHub issue tracker.
+Development Workflow
+--------------------
 
-* Unless your instructor advises otherwise, make your project compatible
-  with the rules and conventions in `docs/conventions.md`.
+Review the required bugs and suggested features in
+[`docs/issues.md`](issues.md). Address the required bugs and select additional
+improvements, or propose your own.
 
-  Use this file as a template for your project’s `docs/CONTRIBUTING.md`.
+For each planned change:
 
-  Create corresponding entries in your repository’s GitHub issue tracker.
+1. Create an issue in your repository.
+2. Develop the change in a dedicated branch.
+3. Submit a pull request.
+4. Review and discuss changes before merging.
 
-* Set up a few milestones for your project in GitHub, and assign issues
-  to them:
+Follow your project's contribution guidelines throughout the process.
 
-  - Milestone for release 1.0.0-alpha (feedback)  
-  - Milestone for release 1.0.0-beta (feature freeze)  
-  - Milestone for release 1.0.0 (stable, hopefully working)  
+Release Planning
+----------------
 
-* The goal of this exercise is to explore established open-source development
-  tools and methodologies, and to get familiar with good practices for long-term
-  project sustainability.
+Organize your work using GitHub milestones:
 
-  You are encouraged to apply a critical view of the strengths and challenges
-  during project development, and to adjust conventions and practices to better
-  facilitate newcomer onboarding and contributor retention.
+- **1.0.0-alpha:** Initial release for feedback.
+- **1.0.0-beta:** Feature freeze and stabilization.
+- **1.0.0:** Stable release.
 
-* Press any key to start.
+Beyond the Exercise
+-------------------
+
+The purpose is not merely to produce a working game, but to experience how
+open-source projects are organized and sustained.
+
+Reflect critically on the practices you adopt, their advantages and
+limitations, and how they can support long-term maintainability, newcomer
+onboarding, and contributor retention.
+
+*Press any key to start.*
 
 References
-------------------------------
+----------
 
-[1] SPDX - Software Package Data Exchange, https://spdx.dev
-[2] REUSE Software, https://reuse.software
-[3] Semantic Versioning, https://semver.org
-
+[1] SPDX — Software Package Data Exchange. https://spdx.dev
