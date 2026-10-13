@@ -47,7 +47,7 @@ and update the relevant files:
 - `README.md`
 - `AUTHORS`
 - `docs/manual.md`
-- `docs/CONTRIBUTING.md`
+- `CONTRIBUTING.md`
 
 Make sure your contribution guidelines reflect the practices and workflows
 adopted by your team.
