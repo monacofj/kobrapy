@@ -14,12 +14,13 @@ Originally developed to introduce undergraduate computer science students to
 open-source development practices and software project management, KobraPy
 can also be used in other educational settings or for independent study.
 
-The exercise invites students to:
-
-- Identify and fix known bugs.
-- Design and implement new features.
-- Practice collaborative development and project management using open-source
-  tools and workflows.
+The primary goal is not programming itself, but learning how open-source
+software is developed and sustained. By working on a real codebase, students
+gain hands-on experience with the practices and workflows of collaborative
+development, including version control, issue tracking, project planning,
+and contribution management. Fixing bugs and implementing features provide
+opportunities to put these practices into action and develop the skills
+needed to participate effectively in open-source projects.
 
 Getting Started
 ---------------
