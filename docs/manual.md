@@ -1,58 +1,50 @@
 KobraPy Manual
-==============================
+==============
 
-KobraPy is a programming exercise inspired by the classic 1980s snake game.
-
-Implemented in Python, it provides a minimal yet functional codebase designed
-for progressive extension by learners. KobraPy was originally conceived as an
-instructional resource to introduce undergraduate computer science students to
-open-source development practices and project management methodologies. Beyond
-this original scope, the project may also serve as a complementary resource
-within formal training programs or as a framework for independent study.
-
-KobraPy is free software and may be distributed under the GNU General Public
-License version 3 or any later version.
+KobraPy is a simple Python implementation of the classic snake game.
 
 Requirements
-------------------------------
+------------
 
-* Python 3
-* Pygame engine (https://www.pygame.org)
+- Python 3
+- Pygame (https://www.pygame.org)
+
+Install Pygame, if needed, with:
+
+```sh
+pip install pygame
+```
+
+Running the Game
+----------------
+
+- Linux/macOS: `./kobra.py`
+- Windows: `python kobra.py`
 
 The Game
-------------------------------
+--------
 
-The game takes place in a rectangular arena where a snake continuously moves in
-one of four orthogonal directions: left, right, up, or down; it never stops. The
-challenge is to steer the snake using the keyboard to help it eat apples that
-appear in random positions. Once consumed, apples disappear and respawn
-elsewhere.
+Guide a snake through a rectangular arena, collecting apples that appear at
+random positions. Each apple increases your score and makes the snake grow
+longer.
 
-Be careful! The arena borders are electrified and will kill the snake if
-touched. Moreover, the snake is poisonous to itself—it dies if its head crosses
-its own tail.
+But beware! The arena borders are electrified, and the snake is poisonous to
+itself. Hitting a wall or biting its own tail ends the game.
 
-The score is the number of apples eaten before the snake dies and the game ends.
-The goal is to collect as many apples as possible.
-
-But there’s a catch: the snake lengthens each time it eats an apple.
+The goal is simple: eat as many apples as you can.
 
 Controls
-------------------------------
+--------
 
-  * `arrow keys`: move the snake up, down, left, right
-  * `Q / q`: quit the game at any time
+- **Arrow keys:** Steer the snake.
+- **P:** Pause or resume the game.
+- **Q:** Quit the game.
 
-When the game ends, press any key to restart or 'q' to quit.
+Press any key to start. After a game over, press any key to play again, or
+`Q` to quit.
 
 Programming Exercise
-------------------------------
+--------------------
 
-To get started with the project:
-
-a) Try the game yourself
-
-   * Linux/MacOS: `./kobra.py`
-   * Windows: `python kobra.py`
-
-b) Read the directions for the exercise in `docs/exercise.md`
+For instructions on using KobraPy as a programming exercise, see
+[`docs/exercise.md`](exercise.md).
