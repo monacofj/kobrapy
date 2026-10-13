@@ -1,38 +1,42 @@
 Copyright 2023 Monaco F. J. <monaco@usp.br>
 
-KobraPy is free software and distributed under the terms of the GNU General
-Public License 3.0.
+KobraPy is free software distributed under the terms of the GNU General
+Public License, version 3 or later.
 
-KobraPy - Programming Exercise
+KobraPy — Programming Exercise
 ==============================
 
-KobraPy is a programming exercise inspired by the classic 1980s snake game.
+KobraPy is a programming exercise inspired by the classic snake game of the
+1980s. Written in Python, it offers a small, functional codebase that students
+can explore, modify, and extend.
 
-Implemented in Python, it provides a minimal yet functional codebase designed
-for progressive extension by learners. KobraPy was originally conceived as an
-instructional resource to introduce undergraduate computer science students to
-open-source development practices and project management methodologies. Beyond
-this initial purpose, the project can also serve as a complementary resource
-within formal training programs or as a framework for independent study.
+Originally developed to introduce undergraduate computer science students to
+open-source development practices and software project management, KobraPy
+can also be used in other educational settings or for independent study.
 
-KobraPy is free software and may be redistributed under the terms of the GNU
-General Public License version 3 or any later version.
+The exercise invites students to:
 
-The exercise involves:
-
-a) Fixing known issues listed in the repository. b) Enhancing the game by adding
-new and engaging features.
+- Identify and fix known bugs.
+- Design and implement new features.
+- Practice collaborative development and project management using open-source
+  tools and workflows.
 
 Getting Started
-------------------------------
+---------------
 
-User instructions are available in `docs/manual.md`.
+For requirements, controls, and instructions on running the game, see
+[`docs/manual.md`](docs/manual.md).
 
-If you enjoy the project, the author would greatly appreciate hearing from you —
-just send an e-mail.
+For the programming assignment and its objectives, see
+[`docs/exercise.md`](docs/exercise.md).
 
 Contributing
-------------------------------
+------------
 
-Contributions to KobraPy are most welcome. Please see `docs/CONTRIBUTING.md` for
-directions on how to get started.
+Contributions to KobraPy itself are welcome. Please read
+[`docs/CONTRIBUTING.md`](docs/CONTRIBUTING.md) before getting started.
+
+If you use KobraPy as the basis for a programming exercise, follow the
+instructions in `docs/exercise.md` to create and develop your own project.
+
+Feedback is welcome; feel free to contact the author by email.
