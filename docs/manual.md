@@ -9,17 +9,34 @@ Requirements
 - Python 3
 - Pygame (https://www.pygame.org)
 
-Install Pygame, if needed, with:
+Setup and Running
+-----------------
+
+Run the following commands from the KobraPy project directory. A virtual
+environment keeps Pygame separate from other Python projects and from your
+system Python installation.
+
+On Linux/macOS:
 
 ```sh
-pip install pygame
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install pygame
+python kobra.py
 ```
 
-Running the Game
-----------------
+On Windows (PowerShell):
 
-- Linux/macOS: `./kobra.py`
-- Windows: `python kobra.py`
+```powershell
+python -m venv .venv
+.venv\\Scripts\\Activate.ps1
+python -m pip install pygame
+python kobra.py
+```
+
+When returning to the project in a new terminal, activate the existing
+environment again; you do not need to reinstall Pygame. The `.venv`
+directory is excluded from version control.
 
 The Game
 --------
