@@ -38,7 +38,7 @@ Contributing
 ------------
 
 Contributions to KobraPy itself are welcome. Please read
-[`docs/CONTRIBUTING.md`](docs/CONTRIBUTING.md) before getting started.
+[`CONTRIBUTING.md`](CONTRIBUTING.md) before getting started.
 
 If you use KobraPy as the basis for a programming exercise, follow the
 instructions in `docs/exercise.md` to create and develop your own project.
