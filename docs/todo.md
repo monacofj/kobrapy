@@ -1,55 +1,79 @@
 To-Do List
 ==========
 
-Before you begin, read [the programming exercise](exercise.md). It explains
-how to set up your own project, document your work, collaborate, and plan
-releases.
+Before starting, read [the programming exercise](exercise.md). It explains
+how to set up your own project, work collaboratively, document your work,
+and plan releases.
 
-Start by populating **your own repository** with GitHub issues for the
-requirements below. Do this **before implementing changes**: each issue should
-describe a problem or feature, explain the expected behavior, and provide
-enough context for a teammate to work on it. You may split large tasks into
-smaller issues.
+Your first development task is to **populate your own repository with GitHub
+issues** for the requirements below. Do this before changing the game.
+Describe the problem or proposed improvement, the expected result, and how
+someone else could verify it. Split larger tasks into smaller issues when
+helpful. Do not create these issues in the original KobraPy repository.
 
-Then plan the work with your team. For each issue, create a branch, submit a
-pull request, and review the changes before merging. The goal is to practice
-open-source collaboration, not just to finish the game.
+For each planned change, use a branch, open a pull request, and discuss and
+review it before merging. Fixing the game matters, but practicing an
+open-source development workflow is the main purpose of the exercise.
 
 Required Fixes
 --------------
 
-Create issues for and resolve **all** of the following bugs:
+Create issues for **all** of these problems and resolve them:
 
 - **Self-collision after reversing direction.** Reversing direction is
-  currently allowed and can cause the snake to bite itself. However, the
-  collision is not detected correctly when the tail has only one segment.
-  Make collision detection consistent.
-- **Apples appearing on the snake.** An apple can be placed on a cell
-  already occupied by the snake. Ensure that new apples appear in an
-  available location.
-- **Apples appearing outside the arena.** Occasionally an apple is placed
-  beyond the visible playing area. Apples must remain inside the arena.
+  currently allowed, and the snake may bite itself as a consequence.
+  However, a collision is not detected correctly when the tail contains
+  only one segment. Make collision detection consistent. Your team may
+  separately decide whether reverse moves should remain allowed.
+- **Apples spawning on the snake.** An apple may appear where the head or
+  tail already is. New apples must occupy a free cell.
+- **Apples spawning outside the arena.** Sometimes an apple does not appear
+  on the visible playing field. Ensure that every apple is placed within
+  the playable area.
+- **Border and playable-area behavior.** Check what happens when the snake
+  reaches the top, bottom, and other edges of the visible arena. The snake
+  should not disappear into an invisible row or move beyond the playing
+  field before a collision is handled. Make the visible boundaries and
+  collision behavior agree.
+- **Pausing the game.** Check that pausing freezes *all* gameplay changes,
+  including collecting apples or changing the snake's length, until play
+  resumes.
 
 Suggested Improvements
 ----------------------
 
-Create issues for the improvements your team chooses to implement. You may
-also propose your own ideas.
+Choose additional improvements with your team, or propose your own. These
+are **ideas, not all mandatory requirements**.
 
-- **Random starting position.** Start the snake at a random valid position,
-  with enough space to move in its initial direction.
-- **Startup menu.** Let players configure options before starting a game,
-  such as their name, grid size, or difficulty.
-- **Difficulty levels.** Offer presets (for example, easy, normal, and hard)
-  or let the difficulty increase as the game progresses.
-- **High score.** Record the best score and preserve it between game
-  sessions.
-- **More game options.** Consider varying the snake's speed, allowing
-  multiple apples, introducing apples that expire, or adding special
-  apples with different effects.
+Gameplay and controls:
 
-Keep the project understandable for newcomers. Prefer focused changes and
-clear explanations of what was changed and why.
+- **Random starting position.** Place the snake at a valid random location,
+  with room to move in its starting direction.
+- **Difficulty levels.** Offer easy, normal, and hard settings, or increase
+  difficulty as the game progresses.
+- **Adjustable speed.** Let the player choose a speed, or make the snake
+  faster as it collects apples.
+- **Independent movement timing.** Currently the speed of the game loop
+  controls both drawing and snake movement. Consider separating movement
+  updates from screen refreshes.
+- **Alternative controls.** Support WASD in addition to the arrow keys.
+- **Multiple or special apples.** Try apples that expire, poison the snake,
+  shorten it, or make it grow by more than one segment.
 
-Remember: this is a starting point for **your project's issue tracker**,
-not a checklist to complete directly in the KobraPy repository.
+Interface and player experience:
+
+- **Startup menu.** Let players configure options such as name, difficulty,
+  grid size, and snake colors.
+- **Persistent high score.** Save the best score between game sessions.
+- **Clearer on-screen information.** Explain the controls on the start and
+  restart screens, and improve the score display.
+- **Visual improvements.** Improve the appearance of the snake, apples,
+  or arena while keeping the game readable.
+- **Sound effects.** Add feedback when an apple is collected or the game
+  ends.
+
+You may also suggest different features, provided the team can explain
+their value and agree on a manageable scope.
+
+Keep the code welcoming to newcomers: make focused changes and explain
+important mechanisms and decisions in clear, human-oriented comments.
