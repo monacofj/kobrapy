@@ -75,5 +75,28 @@ Interface and player experience:
 You may also suggest different features, provided the team can explain
 their value and agree on a manageable scope.
 
+Repository Chores
+-----------------
+
+In addition to improving the game, create issues for the repository
+maintenance tasks below. These tasks help make your project easier for
+others to understand, use, and contribute to.
+
+- **REUSE compliance.** Convert the project's copyright and licensing
+  information to the [REUSE](https://reuse.software/) specification.
+  Use SPDX identifiers where appropriate, preserve existing attribution,
+  and check the result with `reuse lint`.
+- **Issue templates.** Create GitHub issue templates for bug reports and
+  feature requests. Guide newcomers to describe the problem, expected
+  behavior, and steps to reproduce or verify it.
+- **Repository labels.** Adopt the same issue-label scheme used by
+  [MoeaBench](https://github.com/monacofj/moeabench):
+  `bug` (something broken), `feat` (new feature), `chore`
+  (repository maintenance), `wish` (suggestion or feature request),
+  and `noplan` (not currently planned).
+- **Dependency management.** Record the project's dependencies in a
+  `requirements.txt` file and explain how to install them in a
+  virtual environment.
+
 Keep the code welcoming to newcomers: make focused changes and explain
 important mechanisms and decisions in clear, human-oriented comments.
