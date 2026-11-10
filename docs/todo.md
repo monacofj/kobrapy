@@ -38,6 +38,10 @@ Create issues for **all** of these problems and resolve them:
 - **Pausing the game.** Check that pausing freezes *all* gameplay changes,
   including collecting apples or changing the snake's length, until play
   resumes.
+- **Loading assets from another directory.** The game loads its font files
+  using paths relative to the current working directory. Starting the game
+  from a different directory can fail even when the fonts are present.
+  Make asset loading independent of where the command is run.
 
 Suggested Improvements
 ----------------------
