@@ -97,6 +97,10 @@ others to understand, use, and contribute to.
 - **Dependency management.** Record the project's dependencies in a
   `requirements.txt` file and explain how to install them in a
   virtual environment.
+- **Project documentation.** Review and update `AUTHORS`, `README.md`,
+  `CONTRIBUTING.md`, and `docs/conventions.md` to reflect your own project's
+  identity, contributors, development conventions, and contribution workflow,
+  rather than those of the original KobraPy project.
 
 Keep the code welcoming to newcomers: make focused changes and explain
 important mechanisms and decisions in clear, human-oriented comments.
