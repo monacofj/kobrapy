@@ -55,9 +55,11 @@ adopted by your team.
 Development Workflow
 --------------------
 
-Start by creating issues in your own repository for the requirements in
-[`docs/todo.md`](todo.md). Address the required bugs and select additional
-improvements, or propose your own.
+Follow [`docs/todo.md`](todo.md) and the unified
+[`docs/issues.md` catalog](issues.md). Create issues in your own repository
+for all **Critical** and **Required** tasks, including repository chores.
+Choose additional **Wish** tasks, or propose your own, and respect catalog
+dependencies when planning the work.
 
 For each planned change:
 
